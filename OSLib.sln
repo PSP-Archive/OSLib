@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OSLib", "OSLib\OSLib.vcproj", "{50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OSTools", "OSTools\OSTools.vcproj", "{FFAFACCC-7384-461C-87B3-3E3A936D3537}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1} = {50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1}.Debug|Win32.Build.0 = Debug|Win32
+		{50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1}.Release|Win32.ActiveCfg = Release|Win32
+		{50B5F3C9-E8F4-41B3-A7A3-2F46D2AD74F1}.Release|Win32.Build.0 = Release|Win32
+		{FFAFACCC-7384-461C-87B3-3E3A936D3537}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FFAFACCC-7384-461C-87B3-3E3A936D3537}.Debug|Win32.Build.0 = Debug|Win32
+		{FFAFACCC-7384-461C-87B3-3E3A936D3537}.Release|Win32.ActiveCfg = Release|Win32
+		{FFAFACCC-7384-461C-87B3-3E3A936D3537}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

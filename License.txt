@@ -1,0 +1,5 @@
+I voluntary did not put any licence on OSLib, meaning that you are free to do anything with it.
+However, the only thing I'd ask you is that you release the source code (no need to have the same license as here) if you build anything over OSLib (extension, mod, etc.).
+Of course if you made an application or game using OSLib, it's not necessary.
+I want this in order to continue the OSLib "transparentness" philosophy (anybody using a lib should be able to know what is behind in order to not be limited and have to give up his project), and it's especially important so that mods and extensions to the library will not die because an update to the SDK or the lib has made it incompatible and the author has left the scene.
+Thanks!

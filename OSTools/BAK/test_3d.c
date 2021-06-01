@@ -1,0 +1,252 @@
+#include "oslib.h"
+#include "ostools.h"
+
+#define KERNEL_MODE
+
+#ifdef KERNEL_MODE
+	PSP_MODULE_INFO("OSLib kernel", 0x1000, 0, 1); /* 0x1000 REQUIRED!!! */
+	PSP_MAIN_THREAD_ATTR(0);
+#else
+	PSP_MODULE_INFO("OSLib user", 0, 0, 1);
+	PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER|THREAD_ATTR_VFPU);
+#endif
+
+	//Map.bmp
+//Converti avec GBA Graphics par Brunni
+//Map ("","Map.til.c",0,ffffffff)
+//Taille: 16*16 * 32*12
+//Mémoire: 768 octets
+
+const unsigned short mountains_map[12][32]=	{
+	{0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0001|1024|2048, 0x0002, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
+	{0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0002, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
+	{0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
+	{0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0003,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0002, 0x0000, 0x0000},
+	{0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0004, 0x0005, 0x0006,
+0x0007, 0x0008, 0x0003, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
+	{0x0000, 0x0000, 0x0000, 0x0004, 0x0005, 0x0009, 0x000a, 0x000b,
+0x000c, 0x000d, 0x0006, 0x0007, 0x0008, 0x0000, 0x0000, 0x0000,
+0x0000, 0x000e, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
+	{0x0000, 0x0004, 0x0005, 0x0009, 0x000b, 0x000f, 0x000a, 0x000a,
+0x000a, 0x000a, 0x000b, 0x000a, 0x000d, 0x0007, 0x0008, 0x0010,
+0x0011, 0x0012, 0x0013, 0x0014, 0x0000, 0x0000, 0x0000, 0x0000,
+0x0003, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
+	{0x0005, 0x0009, 0x000c, 0x000b, 0x0015, 0x0012, 0x0016, 0x000b,
+0x000a, 0x000a, 0x000a, 0x000c, 0x000b, 0x0017, 0x0018, 0x0019,
+0x001a, 0x001b, 0x001c, 0x001d, 0x0013, 0x0014, 0x0004, 0x0005,
+0x0006, 0x0007, 0x0008, 0x0000, 0x0000, 0x0000, 0x0000, 0x0004},
+	{0x000b, 0x000b, 0x000a, 0x0015, 0x001e, 0x001b, 0x001f, 0x0016,
+0x000a, 0x000c, 0x000a, 0x0017, 0x0018, 0x0019, 0x001a, 0x001a,
+0x001b, 0x001a, 0x001a, 0x001a, 0x0020, 0x0021, 0x0009, 0x000b,
+0x000a, 0x000a, 0x000d, 0x0007, 0x0008, 0x0004, 0x0005, 0x0009},
+	{0x000a, 0x000b, 0x0015, 0x001e, 0x001b, 0x001a, 0x001b, 0x001f,
+0x0016, 0x0017, 0x0018, 0x0019, 0x001b, 0x001a, 0x001a, 0x001a,
+0x001a, 0x001a, 0x0020, 0x0021, 0x0009, 0x000a, 0x000a, 0x000a,
+0x000a, 0x000a, 0x000c, 0x000b, 0x000d, 0x0022, 0x0023, 0x000b},
+	{0x0023, 0x0015, 0x001e, 0x001a, 0x001a, 0x001a, 0x001a, 0x001c,
+0x001f, 0x0024, 0x001c, 0x001a, 0x001a, 0x001a, 0x001a, 0x001b,
+0x0020, 0x0021, 0x0009, 0x000b, 0x000a, 0x000a, 0x000a, 0x000a,
+0x000a, 0x000c, 0x000a, 0x000a, 0x000a, 0x000a, 0x000d, 0x0022},
+	{0x0015, 0x001e, 0x001c, 0x001b, 0x001a, 0x001b, 0x001a, 0x001a,
+0x001a, 0x001f, 0x0024, 0x001b, 0x001b, 0x001a, 0x0020, 0x0021,
+0x0009, 0x000a, 0x000b, 0x000a, 0x000a, 0x000a, 0x000b, 0x000c,
+0x000a, 0x000a, 0x000a, 0x000a, 0x000a, 0x000a, 0x000a, 0x000b}
+};
+
+#include <pspgu.h>
+#include <pspgum.h>
+#include "../common/callbacks.h"
+#include "../common/vram.h"
+
+unsigned int *list;
+ 
+#define BUF_WIDTH (512)
+#define SCR_WIDTH (480)
+#define SCR_HEIGHT (272)
+
+struct Vertex
+{
+   unsigned int color;
+   float x, y, z;
+};
+
+struct Vertex __attribute__((aligned(16))) vertices[1*3] =
+{
+       {0xFF0000FF, 0.0f, -50.0f, 0.0f}, // Top, red
+       {0xFF00FF00, 50.0f, 50.0f, 0.0f}, // Right, green
+       {0xFFFF0000, -50.0f, 50.0f, 0.0f}, // Left, blue
+};
+
+#ifdef KERNEL_MODE
+int user_main(void)
+#else
+int main(void)
+#endif
+{
+	pspDebugScreenInit();
+	setupCallbacks();
+	list = memalign(64, 256 << 10);
+ 
+	// Setup GU
+ 
+	void* fbp0 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	void* fbp1 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+	void* zbp = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
+ 
+	oslInit(1);
+	oslInitGfx(OSL_PF_8888, 1);
+	oslSetQuitOnLoadFailure(1);
+//	sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
+//	sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
+//	sceGuScissor(0,0,SCR_WIDTH,SCR_HEIGHT);
+//	sceGuEnable(GU_SCISSOR_TEST);
+//	sceGuFrontFace(GU_CW);
+//	sceGuShadeModel(GU_SMOOTH);
+//	sceGuDisable(GU_DEPTH_TEST);
+//	oslEndDrawing();
+ 
+//	sceDisplayWaitVblankStart();
+//	sceGuDisplay(1);
+
+	sceCtrlSetSamplingCycle(0);
+	sceCtrlSetSamplingMode(PSP_CTRL_MODE_ANALOG);
+	
+	ScePspFVector3 pos = {240.0f, 136.0f, 0.0f};
+
+	int val = 0;
+	OSL_IMAGE *img = oslLoadImageFilePNG("ms0:/PSP/GAME/OSLib_test/image.png", OSL_IN_RAM, OSL_PF_5650);
+
+	while(running())
+	{
+		SceCtrlData pad;
+ 
+		oslStartDrawing();
+ 
+		sceGuClearColor(0);
+//		sceGuClearDepth(0);
+		sceGuClear(GU_COLOR_BUFFER_BIT);
+
+		sceCtrlPeekBufferPositive(&pad, 1);
+
+		if(pad.Buttons & PSP_CTRL_UP)
+			pos.z += 1.0f / 100.0f;
+		if(pad.Buttons & PSP_CTRL_DOWN)
+			pos.z -= 1.0f / 100.0f;
+
+		if(abs(pad.Lx-128) > 32)
+			pos.x += ((pad.Lx-128)/128.0f);
+		if(abs(pad.Ly-128) > 32)
+			pos.y += ((pad.Ly-128)/128.0f);
+
+		sceGumMatrixMode(GU_PROJECTION);
+		sceGumLoadIdentity();
+		sceGumOrtho(0, 480, 272, 0, -1, 1);
+
+/*		sceGumMatrixMode(GU_VIEW);
+		sceGumLoadIdentity();
+ 
+		sceGumMatrixMode(GU_MODEL);
+		sceGumLoadIdentity();*/
+
+		sceGuEnable(GU_TEXTURE_2D);
+
+//		img->angle++;
+		oslDrawImage(img);
+
+		sceGuDisable(GU_TEXTURE_2D);
+
+                // Draw triangle
+                
+//                sceGumTranslate(&pos);
+//                sceGumRotateZ(val*0.03f);
+
+                sceGumDrawArray(GU_TRIANGLES,GU_COLOR_8888|GU_VERTEX_32BITF|GU_TRANSFORM_3D,1*3,0,vertices);
+
+		sceGuFinish();
+		sceGuSync(0,0);
+
+/*		pspDebugScreenSetOffset((int)OSL_DEFAULT_BUFFER->data);
+		pspDebugScreenSetXY(0,0);
+
+		pspDebugScreenPrintf("x: %.2f y: %.2f z: %.2f",pos.x,pos.y,pos.z);*/
+
+		oslEndDrawing();
+		oslSyncFrame();
+
+		val++;
+
+	}
+ 
+	sceGuTerm();
+
+	sceKernelExitGame();
+	return 0;
+}
+
+
+#ifdef KERNEL_MODE
+
+// Copying the exception handler from SDLSMS as it gives a nice output to find the bug
+void sdl_psp_exception_handler(PspDebugRegBlock *regs)
+{
+	pspDebugScreenInit();
+
+	pspDebugScreenSetBackColor(0x00FF0000);
+	pspDebugScreenSetTextColor(0xFFFFFFFF);
+	pspDebugScreenClear();
+
+	pspDebugScreenPrintf("I regret to inform you your psp has just crashed\n\n");
+	pspDebugScreenPrintf("Exception Details:\n");
+	pspDebugDumpException(regs);
+	pspDebugScreenPrintf("\nThe offending routine may be identified with:\n\n"
+		"\tpsp-addr2line -e target.elf -f -C 0x%x 0x%x 0x%x\n",
+		regs->epc, regs->badvaddr, regs->r[31]);
+}
+#endif
+
+#ifdef KERNEL_MODE
+int main(int argc, char *argp[])
+{
+    // Kernel mode thread
+
+/*    if (adhocLoadDrivers(&module_info) != 0)
+    {
+        printf("Driver load error\n");
+        return 0;
+    }*/
+
+	// Need to copy this across otherwise the address is in kernel mode
+/*	strcpy (RomPath, (char*)argp[0]);
+//	__psp_argv_0 = RomPath;*/
+
+	pspDebugInstallErrorHandler(sdl_psp_exception_handler);
+
+    // create user thread, tweek stack size here if necessary
+    SceUID thid = sceKernelCreateThread("User Mode Thread", user_main,
+            0x13, // default priority is 0x11
+            256 * 1024, // stack size (256KB is regular default)
+            PSP_THREAD_ATTR_USER | THREAD_ATTR_VFPU, NULL);
+
+    // start user thread, then wait for it to do everything else
+    sceKernelStartThread(thid, 0, 0);
+    sceKernelWaitThreadEnd(thid, NULL);
+
+    return 0;
+}
+#endif
+

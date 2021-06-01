@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyOGL", "MyOGL.vcproj", "{B4E27A3F-0923-48BE-A25E-099AE2789405}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3} = {C3D75D20-7A09-492F-A52F-C76EB5B35AA3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Library", "..\PC_Library\Library.vcproj", "{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_fast|Win32 = Debug_fast|Win32
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4E27A3F-0923-48BE-A25E-099AE2789405}.Debug_fast|Win32.ActiveCfg = Debug_fast|Win32
+		{B4E27A3F-0923-48BE-A25E-099AE2789405}.Debug_fast|Win32.Build.0 = Debug_fast|Win32
+		{B4E27A3F-0923-48BE-A25E-099AE2789405}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B4E27A3F-0923-48BE-A25E-099AE2789405}.Debug|Win32.Build.0 = Debug|Win32
+		{B4E27A3F-0923-48BE-A25E-099AE2789405}.Release|Win32.ActiveCfg = Release|Win32
+		{B4E27A3F-0923-48BE-A25E-099AE2789405}.Release|Win32.Build.0 = Release|Win32
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}.Debug_fast|Win32.ActiveCfg = Debug|Win32
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}.Debug_fast|Win32.Build.0 = Debug|Win32
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}.Debug|Win32.Build.0 = Debug|Win32
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}.Release|Win32.ActiveCfg = Release|Win32
+		{C3D75D20-7A09-492F-A52F-C76EB5B35AA3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
